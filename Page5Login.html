@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style></style>
+    <style>
+        /* 設定背景圖片 */
+        body {
+            background-image: url(./IMAGE/other/backgroundlogin.jpg);
+            background-size: 500px;
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-attachment: fixed;
+        }
+
+        /* 內文置中 */
+        main {
+            display: flex;
+            justify-content: center;
+            padding-top: 70px;
+        }
+
+        /* 設定註冊/登入按鈕樣式 */
+        #btnSignup {
+            margin-right: -2px;
+            border-right: solid 2px lightgray;
+            border-bottom: solid 2px lightgray;
+        }
+
+        #btnLogin {
+            margin-left: -2px;
+            border-bottom: solid 2px lightgray;
+        }
+
+        .btnLoginClass {
+            color: #5D98A0;
+            font-weight: bold;
+            background-color: lavender;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 194px;
+            height: 50px;
+            font-size: 20px;
+
+        }
+
+        .btnLoginClass:hover {
+            background-color: whitesmoke;
+        }
+
+        .tableContent {
+            color: #5D98A0;
+            font-weight: bold;
+            text-align: center;
+            height: 280px;
+            width: 380px;
+            padding: 20px 0 0 0;
+
+        }
+
+        #divLogin {
+            border: solid 2px lightgray;
+            background-color: lavender;
+
+        }
+
+        .btnConfirm {
+            font-size: 16px;
+            color: #5D98A0;
+            font-weight: bold;
+            background-color: white;
+            border: solid 2px lightgrey;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .btnConfirm:active {
+            color: black;
+        }
+
+        input {
+            border: #5D98A0;
+            outline-color: #5D98A0;
+            caret-color: #5D98A0;
+            background-color: white;
+            
+        }
+        
+        /* 修改input輸入文字後的顏色 */
+        input:-webkit-autofill{
+            -webkit-text-fill-color: #5D98A0;
+            box-shadow: inset 0 0 0 1000px white;
+        }
+        
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button>
+            </div>
+        </div>
+    </header>
+
+    <main id="myLogin">
+
+        <div id="divLogin">
+            <button onclick="displayTable('signup','btnSignup')" id="btnSignup" class="btnLoginClass">註冊</button>
+            <button onclick="displayTable('login','btnLogin')" id="btnLogin" class="btnLoginClass">登入</button>
+
+            <div id="signup" class="tableContent">
+                <form action="" >
+                    <label for="">請填入註冊所需的個人資料<br>將預設電子郵件為註冊帳號
+                    </label><br><br>
+                    <label for="username">　　　　姓名：</label>
+                    <input type="text" id="username"> <br>
+                    <label for="usermail">　　電子郵件：</label>
+                    <input type="text" id="usermail"> <br>
+                    <label for="userpassword">　　　　密碼：</label>
+                    <input type="text" id="userpassword"><br>
+                    <label for="checkpassword">再次確認密碼：</label>
+                    <input type="text" id="checkpassword"><br>
+                    <br>
+
+                    <button onclick="clickConfirm('btnConfirmSingup')" class="btnConfirm"
+                        id="btnConfirmSingup">確認註冊</button>
+                </form>
+            </div>
+            <div id="login" class="tableContent">
+                <form action="" autocomplete="off">
+                    <br>
+                    <label for="">請依註冊時的電子郵件與密碼登入</label><br><br>
+                    <label for="loginmail">　　　　帳號：</label>
+                    <input type="text" id="loginmail"> <br>
+                    <label for="loginpassword">　　　　密碼：</label>
+                    <input type="text" id="loginpassword"><br>
+                    <br><br>
+                    <button onclick="clickConfirm('btnConfirmLogin')" class="btnConfirm"
+                        id="btnConfirmLogin">確認登入</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script>
+
+        //預設只會先顯示登入內容，故註冊區塊先隱藏
+        $('#signup').css('display', 'none');
+        // $('#btnLogin').css('border-bottom', 'none');
+
+
+        // $('.btnLoginClass').click(function () {
+        //     //先隱藏所有內容
+        //     var tableContent;
+        //     tableContent = document.getElementsByClassName("tableContent");
+
+        //     for (i = 0; i < tableContent.length; i++) {
+        //         tableContent[i].style.display = "none";
+        //     }
+        //     //使用者點選指定的按鈕時，顯示對應的表單
+        //     console.log(this);
+        //     // document.getElementById(btnLogin).style.display = "block";
+        //     // $(this).css('display','block');
+        //     $(this).css('border-bottom','0px');
+        // })
+
+
+        function displayTable(btnLogin, btnName) {
+
+            //先隱藏所有內容
+            var tableContent;
+            tableContent = document.getElementsByClassName("tableContent");
+
+            for (i = 0; i < tableContent.length; i++) {
+                tableContent[i].style.display = "none";
+            }
+
+
+            //使用者點選指定的按鈕時，顯示對應的表單
+
+            document.getElementById(btnLogin).style.display = "block";
+            // document.getElementById(btnLogin).style.borderBottomColor = "lavender";
+            // document.getElementById(btnName).style.borderBottomColor = "lavender";
+
+            // $('.btnLogin:foucs').css("border","solid 1px green");
+            // $(btnName).css('border-bottom', 'none');
+        }
+
+        function clickConfirm(btnName) {
+
+            if (btnName = 'btnConfirmLogin') {
+                var loginMail = $('input[id="loginmail"]').val();
+                var loginPassword = $('input[id="loginpassword"]').val();
+                console.log(loginMail);
+                console.log(loginPassword);
+                if (loginMail != "" && loginPassword != '') {
+
+
+                    document.location.href = 'Page6Purchasecar.html';
+                    alert("登入成功");
+
+                } else {
+                    alert("帳號、密碼有誤");
+                }
+            } else {
+                //註冊帳密判斷式待完成
+            }
+        }
+
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+</html>

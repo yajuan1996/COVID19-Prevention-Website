@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        /* 設定幻燈片區塊樣式 */
+        .slideshow-container {
+            max-width: 700px;
+            position: relative;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        /* 預設每一個圖片區塊隱藏 */
+        .mySlides {
+            display: none;
+        }
+
+        /* 設定 上一頁、下一頁 按鈕樣式 */
+        .btnprev,
+        .btnnext {
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+            background-color: transparent;
+            width: auto;
+            border: none;
+            height: fit-content;
+            margin-top: -18px;
+            padding: 7px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+        }
+
+        /* 設定 下一頁 按鈕的位置靠右 */
+        .btnnext {
+            right: 0;
+        }
+
+        /* 設定 上一頁、下一頁按鈕游標經過樣式 */
+        .btnprev:hover,
+        .btnnext:hover {
+            color: gold;
+        }
+
+        /* 設定內容文字樣式 */
+        .text {
+            color: white;
+            background-color: gray;
+            font-size: 20px;
+            font-weight: bold;
+            text-shadow: 0 0 2px gray;
+            padding: 8px 12px;
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 暫不設定 第幾分頁的文字樣式 */
+        /* .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  } */
+
+        /* 設定小圓圈樣式 */
+        /* .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  } */
+
+        /* .dot:hover {
+    background-color: #717171;
+  } */
+
+        .active {
+            background-color: #717171;
+        }
+
+        /* 設定換頁動畫 */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>最新疫情公告</h1>
+        <!-- 整個幻燈片區塊 -->
+        <div class="slideshow-container">
+
+            <!-- 幻燈片與文字敘述 -->
+            <div class="mySlides fade">
+                <div class="numbertext">1</div>
+                <div class="text">入境居家檢疫天數</div>
+                <button onclick="changeSlide(2)" class="btnprev">&#10094;</button>
+                <button onclick="changeSlide(1)" class="btnnext">&#10095;</button>
+                <img src="./IMAGE/slideshow/01ImmigrationDay.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2</div>
+                <div class="text">居家隔離天數</div>
+                <button onclick="changeSlide(0)" class="btnprev">&#10094;</button>
+                <button onclick="changeSlide(2)" class="btnnext">&#10095;</button>
+                <img src="./IMAGE/slideshow/02IsolationDay.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3</div>
+                <div class="text">自主防疫期間應遵守之規範</div>
+                <button onclick="changeSlide(1)" class="btnprev">&#10094;</button>
+                <button onclick="changeSlide(0)" class="btnnext">&#10095;</button>
+                <img src="./IMAGE/slideshow/03Regulation.jpg" style="width:100%">
+            </div>
+
+            <!-- 暫時取消 下一頁、上一頁 按鈕 
+            <a class="prev" onclick="plusSlides()">&#10094;</a>
+            <a class="next" onclick="plusSlides()">&#10095;</a> -->
+        </div>
+        <br>
+
+        <!-- 暫時取消 圖片底下小圓圈  -->
+        <!-- <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div> -->
+
+    </main>
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        // 自動撥放圖片
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 5000); // 每5秒切換圖片
+        }
+
+
+
+        //按下按鈕控制頁面，並重新撥放
+        function changeSlide(num) {
+            console.log('ok');
+
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            slides[num].style.display = "block";
+
+        }
+
+
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+</html>

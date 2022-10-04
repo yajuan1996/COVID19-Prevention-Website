@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <title>購物車</title>
+    <style>
+        /* 設定內文置中 */
+        main {
+            text-align: center;
+
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        /* 設定按鈕樣式 */
+        .btnMember {
+            font-size: 20px;
+            border: solid 1px gray;
+            color: white;
+            text-shadow: 0px 0px 7px gray;
+            border-radius: 5px;
+            background-color: #A1BAB0;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .btnMember:hover {
+            background-color: #a1bab0ab;
+        }
+
+        .classBtn {
+            background-color: whitesmoke;
+            border: solid 1px gray;
+            border-radius: 10px;
+            color: gray;
+            text-shadow: 0 0 2px gainsboro;
+            font-size: 16px;
+            margin: 8px;
+
+        }
+
+        .classBtn:hover {
+            background-color: rgb(220, 220, 220);
+            color: black;
+        }
+
+        /* 設定購物車樣式 */
+        #divCar {
+            background-color: #A1BAB0;
+            text-align: left;
+            width: 65%;
+            margin: 0 auto;
+            padding: 10px;
+            color: whitesmoke;
+            text-shadow: 0px 0px 10px gray;
+
+
+
+        }
+
+        .title {
+            color: white;
+            font-size: 18px;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 80%;
+            text-align: center;
+            border: solid 1px gainsboro;
+            border-collapse: collapse;
+            color: black;
+            text-shadow: none;
+
+        }
+
+        tr:nth-child(even) {
+
+            background: white;
+        }
+
+        tr:nth-child(odd) {
+            /* background-color:#e2e2e2;  */
+            background-color: white;
+        }
+
+        tr {
+            border: 1px solid gainsboro;
+        }
+
+        #divBuyData {
+            display: none;
+        }
+
+        #divBuyData div {
+            margin: 10px 0 0px 5px;
+        }
+
+        label,
+        input {
+            margin: 3px;
+
+        }
+
+        #divBuyData input[name="receiverData"],
+        #divBuyData input[name="buyerData"] {
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <!-- <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button> -->
+                <button onclick="clickloginbtn('logout')" type="button" class="btn">登出</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>會員中心</h1>
+        <input class="btnMember" type="button" value="購物車">
+        <input class="btnMember" type="button" value="訂單查詢">
+        <br>
+        <br>
+        <div id="divCar">
+            <span class="title">▼ 購物車</span><br>
+            <hr>
+            <div class="divOrder">
+                <div></div>
+                <table id="tbCar"></table>
+                <hr>
+                <div>
+
+                    <span>合計：</span><span id="total">0</span><span>元</span>
+                    <br>
+                    <input onclick="nextstep('divBuyData')" type="button" value="下一步：填寫資料" class="classBtn">
+                </div>
+
+                <div id="divBuyData">
+                    <!-- 運送方式 -->
+                    <div id="divShip">
+                        <hr>
+                        <label for="">請選擇運送方式</label><br>
+                        <input type="radio" name="rdoShip" id="rdoHome" value="宅配">
+                        <label for="rdoHome">宅配</label>
+                        <input type="radio" name="rdoShip" id="rdoConvenience" value="超商取貨">
+                        <label for="rdoConvenience">超商取貨</label>
+                    </div>
+
+                    <!-- 付款方式 -->
+                    <div id="divPay">
+                        <hr>
+                        <label for="">請選擇付款方式</label><br>
+                        <input type="radio" name="rdoPay" id="rdoCash" value="貨到付款">
+                        <label for="rdoCash">貨到付款</label>
+                        <input type="radio" name="rdoPay" id="rdoCard" value="信用卡">
+                        <label for="rdoCard">信用卡</label>
+                        <input type="radio" name="rdoPay" id="rdoApplepay" value="ApplePay">
+                        <label for="rdoApplepay">ApplePay</label>
+                        <input type="radio" name="rdoPay" id="rdoLinepay" value="LinePay">
+                        <label for="rdoLinepay">LinePay</label>
+
+                    </div>
+
+                    <!-- 收件者資料 -->
+                    <div id="divReceiver">
+                        <hr>
+                        <label for="">請輸入<b> 收件人 </b>聯絡資訊</label><br>
+                        <label for="receiverName">姓　　名：</label>
+                        <input type="text" name="receiverData" id="receiverName"><br>
+                        <label for="receiverPhone">電　　話：</label>
+                        <input type="text" name="receiverData" id="receiverPhone"><br>
+                        <label for="receiverEmail">電子郵件：</label>
+                        <input type="email" name="receiverData" id="receiverEmail"><br>
+                        <label for="receiverAddress">寄送地址：</label>
+                        <input type="text" name="receiverData" id="receiverAddress">
+                    </div>
+
+                    <!-- 訂購者資料 -->
+                    <div id="divBuyer">
+                        <hr>
+                        <label for="">請輸入<b> 購買人 </b>聯絡資訊</label>
+                        <input type="checkbox" name="" id="equalReceiver">
+                        <label for="equalReceiver">是否同<b> 收件人 </b>資訊</label><br>
+                        <label for="buyerName">姓　　名：</label>
+                        <input type="text" name="buyerData" id="buyerName"><br>
+                        <label for="buyerPhone">電　　話：</label>
+                        <input type="text" name="buyerData" id="buyerPhone"><br>
+                        <label for="buyerEmail">電子郵件：</label>
+                        <input type="email" name="buyerData" id="buyerEmail"><br>
+                        <label for="buyerAddress">聯絡地址：</label>
+                        <input type="text" name="buyerData" id="buyerAddress">
+
+                    </div>
+
+                    <!-- 發票 -->
+                    <div>
+                        <hr>
+                        <label for="">發票開立</label><br>
+                        <input type="radio" name="rdoInvoice" id="rdoPersonal">
+                        <label for="rdoPersonal">個人(二聯式發票)</label>
+                        <input type="radio" name="rdoInvoice" id="rdoCompany">
+                        <label for="rdoCompany">公司行號(三聯式發票)</label>
+                        <input type="radio" name="rdoInvoice" id="rdoDonate">
+                        <label for="rdoDonate">捐贈發票</label>
+                    </div>
+                    <hr>
+                    <input onclick="buy()" type="button" value="資料無誤，確認下單" class="classBtn">
+
+
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+        </div>
+    </main>
+    <script>
+        // 取得上一頁選擇的購買品項
+        tbCar.innerHTML = localStorage.getItem("car");
+        total.innerHTML = localStorage.getItem("total");
+
+        // 執行 下一步 按鈕時,顯示 聯絡人div
+        function nextstep(butName) {
+            var x = document.getElementById(butName);
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            }
+        }
+
+        //當按下核取"同收件人"方塊，自動填入與收件人相同的資訊
+
+        $('input[id="equalReceiver"]').on('click', function () {
+            if ($('input[id="equalReceiver"]').prop('checked')) {
+                $('input[id="buyerName"]').prop('value', ($('input[id="receiverName"]').val()))
+                $('input[id="buyerPhone"]').prop('value', ($('input[id="receiverPhone"]').val()))
+                $('input[id="buyerEmail"]').prop('value', ($('input[id="receiverEmail"]').val()))
+                $('input[id="buyerAddress"]').prop('value', ($('input[id="receiverAddress"]').val()))
+            } else {
+                $('input[id="buyerName"]').prop('value', "");
+                $('input[id="buyerPhone"]').prop('value', "");
+                $('input[id="buyerEmail"]').prop('value', "");
+                $('input[id="buyerAddress"]').prop('value', "");
+            }
+
+            //    試圖想用物件方式回傳,尚未完成
+            // console.log($('input[name="receiverData"]').each(function(){
+            //     $(this).val();                
+
+        });
+
+
+        // 執行 確認下單 按鈕時,跳出 "已完成訂購",並導向 "訂單管理" 的頁面
+
+        function buy() {
+            // 儲存付款方式及運送方式
+            var payment = $('input[name="rdoPay"]:checked').val();
+            console.log(payment);
+
+            if (payment == '貨到付款') {
+                var paycondition = '待付款'
+            } else {
+                paycondition = '已付款';
+            }
+            console.log(paycondition);
+
+            var shipment = $('input[name="rdoShip"]:checked').val();
+            console.log(shipment);
+            var orderitem = $('#tbCar').html();
+            var total = $('#total').text();
+
+            var mytoday = new Date();
+            var orderdate = `${mytoday.getFullYear()}${(mytoday.getMonth() + 1).toString().padStart(2, "0")}${mytoday.getDate().toString().padStart(2, "0")}`;
+            console.log(localStorage.getItem('orderdate'));
+            console.log(orderdate);
+
+
+
+            var ordernumber = localStorage.getItem('ordernumber');
+
+            console.log(ordernumber);
+            // console.log(ordernumber.substr(0, 8));
+
+            //預設編號為當天日期+00001起的流水號
+            if (ordernumber == null || ((localStorage.getItem('ordernumber')).substr(0, 8) != orderdate)) {
+                ordernumber = orderdate + ('1').padStart(5, "0");
+            } else {
+                ordernumber = (parseInt(ordernumber) + 1).toString();
+            }
+            console.log(ordernumber);
+
+
+            localStorage.setItem('ordernumber', ordernumber);
+            localStorage.setItem('orderdate', orderdate);
+            localStorage.setItem('shipment', shipment);
+            localStorage.setItem('paycondition', paycondition);
+            localStorage.setItem('orderitem', orderitem);
+            localStorage.setItem('total', total);
+
+            console.log(orderitem);
+            console.log(total);
+
+
+            alert('訂單已成立!');
+            // setTimeout(function () {
+            document.location.href = './Page7Member.html';
+            // }, 1000);
+        }
+
+
+        //若是選擇信用卡則跳轉頁面,需要有付款畫面---尚未完成
+
+        //設定按鈕跳轉頁面
+        $('input[value="購物車"]').click(function () {
+            location.href = "./Page6Purchasecar.html";
+        });
+        $('input[value="訂單查詢"]').click(function () {
+            location.href = "./Page7Member.html";
+        });
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+
+</html>

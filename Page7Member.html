@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂單查詢</title>
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        /* 設定內文置中 */
+        main {
+            text-align: center;
+        }
+
+        body {
+            background-color: aliceblue;
+        }
+
+        /* 設定按鈕樣式 */
+        .btnMember {
+            font-size: 20px;
+            border: solid 1px gray;
+            color: white;
+            text-shadow: 0px 0px 7px gray;
+            border-radius: 5px;
+            background-color: #A1BAB0;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .btnMember:hover {
+            background-color: #a1bab0ab;
+        }
+
+        #table1 {
+            display: none;
+        }
+
+        /* 設定訂單區塊樣式 */
+        #divYourOrder {
+            background-color: #A1BAB0;
+            text-align: left;
+            width: 65%;
+            margin: 0 auto;
+            padding: 10px;
+
+        }
+
+        .title {
+            color: white;
+            font-size: 18px;
+            text-shadow: 0px 0px 10px gray;
+        }
+
+        /* 設定單筆訂單樣式 */
+        .divOrder {
+            border: solid 1px rgba(128, 128, 128, 0.514);
+            border-radius: 5px;
+            width: 90%;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: white;
+            line-height: 28px;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 80%;
+            border: solid 1px #A1BAB0;
+            border-collapse: collapse;
+        }
+
+        table tr {
+            border: solid 1px #A1BAB0;
+        }
+
+        /* 設定訂購商品按鈕樣式 */
+        .btnOrderlist {
+            width: 100%;
+            border: none;
+            background-color: transparent;
+            font-size: 16px;
+        }
+
+        .btnOrderlist:hover {
+            text-decoration: underline;
+        }
+
+        /* 設定表格樣式 */
+        #divOrderItem {
+            margin-top: 10px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <!-- <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button> -->
+                <button onclick="clickloginbtn('logout')" type="button" class="btn">登出</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1>會員中心</h1>
+        <input class="btnMember" type="button" value="購物車">
+        <input class="btnMember" type="button" value="訂單查詢">
+        <br>
+        <br>
+        <div id="divYourOrder">
+            <span class="title">▼ 您的訂單</span><br>
+            <hr>
+            <div class="divOrder">
+
+                <span>訂單編號：</span><span id="ordernumber">0001</span><br>
+                <span>訂購日期：</span><span id="orderdate">220704</span><br>
+                <span>訂購金額：NT$</span><span id="total">300</span><br>
+                <span>運送方式：</span><span id="shipment">宅配</span><br>
+                <span>訂單狀態：</span><span id="paycondition">已付款</span><br>
+
+                <hr>
+                <input class="btnOrderlist" onclick="displayDiv('table1')" type="button" value="展開訂購商品 ▽">
+                <div id="table1">
+                    <table id="divOrderItem"></table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        ordernumber.innerHTML = localStorage.getItem("ordernumber");
+        orderdate.innerHTML = localStorage.getItem("orderdate");
+        total.innerHTML = localStorage.getItem("total");
+        shipment.innerHTML = localStorage.getItem("shipment");
+        paycondition.innerHTML = localStorage.getItem("paycondition");
+        divOrderItem.innerHTML = localStorage.getItem("orderitem");
+
+
+        function displayDiv(butName) {
+            var x = document.getElementById(butName);
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+                $('.btnOrderlist').val('收合訂購商品 ▽');
+            } else {
+                $('.btnOrderlist').val('展開訂購商品 ▽');
+                x.style.display = "none";
+            }
+        }
+
+        //設定按鈕跳轉頁面
+        $('input[value="購物車"]').click(function () {
+            location.href = "./Page6Purchasecar.html";
+        });
+        $('input[value="訂單查詢"]').click(function () {
+            location.href = "./Page7Member.html";
+        });
+
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+</html>

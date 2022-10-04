@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確診怎麼辦</title>
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        /* 預設所有div未顯示 */
+        .divDiagnosed {
+            display: none;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2b559f;
+        }
+
+
+
+        #divLeft {
+            background-color: #c5daed;
+            border: solid 5px #2b559f;
+            border-radius: 10px;
+            width: 48%;
+            margin-top: 20px;
+            /* margin-right: 5%; */
+            text-align: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        /* 設定表單對齊與位置 */
+        #divLeft .question {
+            text-align: left;
+            padding: 0 0 0 5%;
+        }
+
+        /* 設定左方個區塊間距與文字行高 */
+        #divLeft div {
+            padding: 2% 0 2% 0;
+            line-height: 32px;
+        }
+
+        /* 設定 '查詢' 按鈕的樣式 */
+        #searchDay {
+            background-color: #2b559f;
+            border: black 2px solid;
+            border-radius: 10px;
+            color: #c5daed;
+            font-size: 22px;
+            text-shadow: 0 0 1px white;
+            padding: 7px 12px 7px 12px;
+        }
+
+        /* 預設查詢結果隱藏 */
+        #divResult {
+            display: none;
+            font-size: 24px;
+            color: black;
+            text-shadow: 0 0 5px gainsboro;
+            margin-bottom: 28px;
+        }
+        .result{
+            color: #2b559f;
+            font-size: 28px;
+
+        }
+
+        /* 預設疫苗問題隱藏 */
+        #divVaccine {
+            display: none;
+        }
+
+        /* 設定左右兩側位置置中 */
+        #mainDiagnosed {
+            display: inline-flex;
+            margin-left: 10%;
+            margin-right: 10%;
+            width: 80%;
+        }
+
+        /* 設定右方各區塊置中對齊 */
+        #divDisplay {
+            font-size: 18px;
+            margin: 0 auto;
+        }
+
+        ul,
+        ol,table  {
+            display: table;
+            margin: auto;
+            
+        }
+
+        ul {
+            width: 68%;
+            
+        }
+
+        li {
+            margin: 7px;            
+        }
+
+        /* 設定按鈕樣式 */
+        #divDisplay>button {
+            margin: 20px auto;
+            display: block;
+            font-size: 25px;
+            color: white;
+            background-color: #2b559f;
+            border: none;
+            border-radius: 10px;
+            width: 550px;
+            padding: 6px;
+
+        }
+
+        #btnSerious {
+            width: 150px;
+            font-size: 20px;
+            background-color: grey;
+            color: white;
+            margin: 20px auto 20px 20%;
+            border: none;
+            border-radius: 10px;
+
+        }
+
+        /* 按鈕後統一加入圖案 */
+        #divDisplay button::after {
+            content: " ▼";
+        }
+
+        #divDisplay button:hover {
+            text-decoration: underline;
+        }
+
+        /* 設定表格樣式 */
+        table {
+            text-align: center;
+            border-collapse: collapse;
+            border: 3px solid black;
+        }
+
+        th,
+        td {
+            border: 2px solid black;
+        }
+
+        th {
+            background-color: #c5daed;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button>
+            </div>
+        </div>
+    </header>
+    <h1>確診怎麼辦</h1>
+    <main id="mainDiagnosed">
+
+        <div id="divLeft">
+            <h2>查詢隔離天數</h2>
+            <div class="question">
+                <label for="sickDate">請選擇確診日期：</label>
+                <input type="date" name="" id="sickDate"><br>
+            </div>
+            <div class="question">
+                <label for="">請確認您的身分：</label>
+                <input type="radio" name="condition" id="diagnosed">
+                <label for="diagnosed">確診者</label>
+                <input type="radio" name="condition" id="closer">
+                <label for="closer">密切接觸者</label>
+            </div>
+            <div class="question" id="divVaccine">
+                <label for="">請確認您是否已打滿三劑疫苗：</label>
+                <input type="radio" name="vaccine" id="vaccine3">
+                <label for="vaccine3">已打三劑疫苗</label>
+                <input type="radio" name="vaccine" id="vaccine3lower">
+                <label for="vaccine3lower">未打三劑疫苗</label>
+            </div>
+            <br>
+            <input onclick="search()" id="searchDay" type="button" value="查詢">
+
+            <div id="divResult">
+                <h3>您的查詢結果：</h3>
+                <span>居家隔離</span><span>&#10095;&#10095;</span>
+                <span>天數：</span><span class="result" id="homeisolationDay"></span><span> 天</span>
+                <span> &#10095; </span>
+                <span>日期：</span><span class="result" id="homeisolationDate"></span>
+                <br>
+                <span>自主防疫</span><span>&#10095;&#10095;</span>
+                <span>天數：</span><span class="result" id="selfDay"></span><span> 天</span>
+                <span> &#10095; </span>
+                <span>日期：</span><span class="result" id="selfDate"></span>
+            </div>
+            <div id="divLeftImg">
+                <img width="500px" src="./IMAGE/step/homeisolation.jpg" alt="">
+            </div>
+        </div>
+
+        <div id="divDisplay">
+            <button onclick="displayDiv('divStep')">快篩陽性處置流程</button>
+
+            <div id="divStep" class="divDiagnosed">
+
+                <ol>
+                    <li>將檢測片寫上檢測者姓名、日期</li>
+                    <li>視訊診療-將檢測片與健保卡一起拍照</li>
+                    <li>醫師診斷確診，並開立相關藥物</li>
+                    <li>透過健保卡系統自動通報確診，在家等候衛生局安排隔離處所</li>
+                    <li>若符合居家照顧條件，可於家中隔離</li>
+                </ol>
+            </div>
+
+            <button onclick="displayDiv('divDays')">隔離天數</button>
+
+            <div id="divDays" class="divDiagnosed">
+                <table>
+                    <tr>
+                        <th rowspan="2" colspan="2">身分</th>
+                        <th colspan="2">天數</th>
+                    </tr>
+                    <tr>
+                        <th>居家隔離</th>
+                        <th>自主防疫</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">確診者</td>
+                        <td>7</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">密切接觸者</td>
+                        <td>已打三劑疫苗</td>
+                        <td>0</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+
+                        <td>未打三劑疫苗</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                </table>
+            </div>
+
+            <button onclick="displayDiv('divNotes')">確診後注意事項</button>
+            <div id="divNotes" class="divDiagnosed">
+                <ul>
+                    <li>早晚量體溫，配合健康回報</li>
+                    <li>多休息、飲水，視醫囑服用藥物</li>
+                    <li>若出現以下<strong> 嚴重症狀 </strong>，可透過衛生局或鄰近醫療單位進行視訊診療，必要時安排外出就醫</li>
+
+                </ul>
+
+                <button id="btnSerious" onclick="displayDiv('divSymptom')">嚴重症狀</button>
+                <div id="divSymptom" class="divDiagnosed">
+                    <ul>
+
+                        <li>喘或呼吸困難</li>
+                        <li>持續胸痛、胸悶</li>
+                        <li>意識不清</li>
+                        <li>皮膚或嘴唇或指甲床發青</li>
+                        <li>無發燒（體溫<38℃）之情形下，心跳>100 次/分鐘</li>
+                        <li>無法進食、喝水或服藥</li>
+                        <li>過去 24 小時無尿或尿量顯著減少</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+
+        function displayDiv(butName) {
+            var x = document.getElementById(butName);
+            if (x.style.display === "none" || x.style.display === "") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        $('#diagnosed').on('focus', function () {
+            $('#divVaccine').css('display', 'none');
+        });
+        $('#closer').on('focus', function () {
+            $('#divVaccine').css('display', 'block');
+        });
+
+        // 按下查詢鍵，取得日期與身分，進行天數加總
+        function search() {
+            var sickDate = new Date($('input[type="date"]').val());
+            console.log($('input[type="date"]').val());
+            console.log(sickDate);
+            var condition = $('input[name="condition"]:checked').prop('id');
+            console.log(condition);
+            var vaccine = $('input[name="vaccine"]:checked').prop('id');
+            console.log(vaccine);
+            var homeisolationDay = 0;
+            var selfDay = 0;
+            if ($('input[type="date"]').val() == "") {
+                $('#divResult').css('display', 'none');
+                alert('請選擇確診日期');
+            } else {
+                $('#divResult').css('display', 'block');
+                switch (condition) {
+                    case 'diagnosed':
+                        homeisolationDay = 7;
+                        selfDay = 7;
+                        break;
+                    case 'closer':
+                        switch (vaccine) {
+                            case 'vaccine3':
+                                homeisolationDay = 0;
+                                selfDay = 7;
+                                break;
+                            case 'vaccine3lower':
+                                homeisolationDay = 3;
+                                selfDay = 4;
+                                break;
+                            default:
+                                $('#divResult').css('display', 'none');
+                                alert("請選擇是否已打滿3劑疫苗");
+                                break;
+                        }
+                        break;
+                    default:
+                        $('#divResult').css('display', 'none');
+                        alert("請選擇身分");
+                        break;
+                }
+            }
+            
+            var homeisolationDate = new Date(Date.parse(sickDate) + homeisolationDay * 86400000);
+            var selfDate = new Date(Date.parse(sickDate) + homeisolationDay * 86400000 + selfDay * 86400000);
+            $('#homeisolationDay').text(homeisolationDay);
+            $('#homeisolationDate').text(`${homeisolationDate.getFullYear().toString()}/${(homeisolationDate.getMonth()+1).toString().padStart(2,'0')}/${(homeisolationDate.getDate()).toString().padStart(2,'0')}`);
+            $('#selfDay').text(selfDay);
+            $('#selfDate').text(`${selfDate.getFullYear().toString()}/${(selfDate.getMonth()+1).toString().padStart(2,'0')}/${(selfDate.getDate()).toString().padStart(2,'0')}`);
+
+        }
+
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+</html>

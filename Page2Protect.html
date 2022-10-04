@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防疫措施</title>
+    <link rel="icon" href="./IMAGE/icon/iconcovid19.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="topnav.css">
+    <script src="./jquery-3.6.0.js"></script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        main {
+            text-align: center;
+            /* padding-top: 70px; */
+        }
+
+        table {
+            margin: 0px auto;
+            font-size: 18px;
+        }
+        
+
+        th img {
+            margin: 18px;
+            border-radius: 45px;
+            padding: 30px;
+            /* background-color: #C7E2D7; */
+            background-color:lightgrey;
+            }
+
+            h1{
+                margin-bottom: 5px;
+            }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="mytopnav">
+            <!-- <div class="topnav"> -->
+            <a href="Page0Index.html">
+                <img id="covidLogo" src="./IMAGE/icon/logo.jpg" alt="logo">
+            </a>
+            <!-- </div> -->
+            <div class="topnav">
+                <a href="Page0Index.html" class="topnavList">首頁</a>
+                <div class="topnavList">
+                    <a class="topnavList1">關於疫情</a>
+                    <div class="topnavContent">
+                        <a href="Page1Description.html">認識COVID-19</a>
+                        <a href="Page2Protect.html">防疫措施</a>
+                        <a href="Page3Diagnosed.html">確診怎麼辦</a>
+                    </div>
+                </div>
+                <a href="Page4Product.html" class="topnavList">防疫用品</a>
+                <a href="Page5Login.html" class="topnavList">會員中心</a>
+                <!-- <a href="" class="topnavList">其他連結</a> -->
+                <!-- <a href="" class="topnavList">關於我們</a> -->
+            </div>
+            <div id="topnavRight" class="topnav">
+                <button onclick="clickloginbtn('signup')" type="button" class="btn">註冊</button>
+                <button onclick="clickloginbtn('login')" type="button" class="btn">登入</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>防疫措施</h1>
+        <table>
+            <tr>
+                <th><img src="IMAGE/protect/01mask.png" alt=""></th>
+                <th><img src="IMAGE/protect/02temperature.png" alt=""></th>
+                <th><img src="IMAGE/protect/03washhands.png" alt=""></th>
+            </tr>
+            <tr>
+                <th>戴口罩</th>
+                <th>量體溫</th>
+                <th>使用清潔液、酒精消毒</th>
+
+            </tr>
+            <tr>
+                <th><img src="IMAGE/protect/04stophandshake.png" alt=""></th>
+                <th><img src="IMAGE/protect/05safetydistance.png" alt=""></th>
+                <th><img src="IMAGE/protect/06hospital.png" alt=""></th>
+            </tr>
+            <tr>
+
+                <th>避免接觸</th>
+                <th>保持社交距離</th>
+                <th>出現症狀立即就醫</th>
+            </tr>
+        </table>
+    </main>
+    <script>
+        $('img').on('mousemove', function () {
+            $(this).css('background-color', '#C7E2D7');
+        });
+        $('img').on('mouseout', function () {
+            $(this).css('background-color', 'lightgrey');
+        });
+    </script>
+    <script src="topnav.js"></script>
+</body>
+
+</html>
